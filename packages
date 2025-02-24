@@ -9,6 +9,7 @@ shinyAce
 shinyjs
 reactR
 shinyWidgets
+visNetwork
 dreamRs/gridstackr
 cynkra/scoutbaR
 cynkra/blockr.core
