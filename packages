@@ -1,4 +1,5 @@
 vctrs
+generics
 cynkra/blockr.core
 cynkra/blockr.dplyr
 cynkra/blockr.ui
