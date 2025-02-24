@@ -4,6 +4,7 @@ DT
 htmlwidgets
 crosstalk
 yaml
+bsicons
 cynkra/blockr.core
 cynkra/blockr.dplyr
 cynkra/blockr.ui
