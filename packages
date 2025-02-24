@@ -2,6 +2,7 @@ vctrs
 generics
 DT
 htmlwidgets
+crosstalk
 cynkra/blockr.core
 cynkra/blockr.dplyr
 cynkra/blockr.ui
