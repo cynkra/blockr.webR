@@ -6,6 +6,7 @@ crosstalk
 yaml
 bsicons
 shinyAce
+shinyjs
 cynkra/blockr.core
 cynkra/blockr.dplyr
 cynkra/blockr.ui
