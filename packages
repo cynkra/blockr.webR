@@ -3,6 +3,7 @@ generics
 DT
 htmlwidgets
 crosstalk
+yaml
 cynkra/blockr.core
 cynkra/blockr.dplyr
 cynkra/blockr.ui
