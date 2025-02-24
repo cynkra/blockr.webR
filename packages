@@ -12,6 +12,7 @@ shinyWidgets
 visNetwork
 dplyr
 pillar
+tibble
 dreamRs/gridstackr
 cynkra/scoutbaR
 cynkra/blockr.core
