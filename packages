@@ -1,6 +1,7 @@
 vctrs
 generics
 DT
+htmlwidgets
 cynkra/blockr.core
 cynkra/blockr.dplyr
 cynkra/blockr.ui
