@@ -1,2 +1,2 @@
 # blockr.webR
-Wasm repo for blockr.core and cie
+Wasm repo for blockr.core and cie.
