@@ -13,6 +13,7 @@ visNetwork
 dplyr
 pillar
 tibble
+pkgconfig
 dreamRs/gridstackr
 cynkra/scoutbaR
 cynkra/blockr.core
