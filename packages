@@ -21,3 +21,6 @@ cynkra/blockr.core
 cynkra/blockr.dplyr
 cynkra/blockr.ui
 cynkra/blockr.gt
+cynkra/blockr.io
+cynkra/blockr.sdtm
+cynkra/dockViewR
