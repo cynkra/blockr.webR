@@ -15,6 +15,7 @@ pillar
 tibble
 pkgconfig
 tidyselect
+pharmaversesdtm
 dreamRs/gridstackr
 cynkra/scoutbaR
 cynkra/blockr.core
@@ -25,4 +26,3 @@ cynkra/blockr.io
 cynkra/blockr.sdtm
 cynkra/blockr.ai
 cynkra/dockViewR
-pharmaversesdtm
