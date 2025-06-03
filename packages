@@ -24,6 +24,7 @@ scales
 farver
 RColorBrewer
 palmerpenguins
+constructive
 reactR
 shinyWidgets
 dplyr
