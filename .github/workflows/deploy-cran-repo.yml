@@ -52,11 +52,11 @@ jobs:
       - name: Checkout calling repository
         uses: actions/checkout@v4
 
-      #- name: Checkout r-wasm/actions repository
-      #  uses: actions/checkout@v4
+      - name: Checkout r-wasm/actions repository
+        uses: actions/checkout@v4
       #  with:
       #    ref: v2
-      #    repository: r-wasm/actions
+      #    repository: cynkra/
       #    token: ${{ secrets.GITHUB_TOKEN }}
       #    path: .actions
 
