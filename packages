@@ -13,6 +13,7 @@ S7
 httr2
 coro
 styler
+purrr
 reactR
 shinyWidgets
 dplyr
