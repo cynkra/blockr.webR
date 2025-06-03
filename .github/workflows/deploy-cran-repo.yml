@@ -51,12 +51,14 @@ jobs:
     steps:
       - name: Checkout calling repository
         uses: actions/checkout@v4
+        with:
+            path: .actions
 
-      - name: Checkout r-wasm/actions repository
-        uses: actions/checkout@v4
+      #- name: Checkout r-wasm/actions repository
+      #  uses: actions/checkout@v4
       #  with:
       #    ref: v2
-      #    repository: cynkra/
+      #    repository: cynkra/blockr.webR
       #    token: ${{ secrets.GITHUB_TOKEN }}
       #    path: .actions
 
@@ -72,7 +74,7 @@ jobs:
           cat("pkgs=", paste0(pkgs, collapse = ","), "\n", file = Sys.getenv("GITHUB_OUTPUT"), sep = "", append = TRUE)
 
       - name: Build wasm repo
-        uses: ./build-rwasm
+        uses: ./.actions/build-rwasm
         with:
           # If `.pkgs` does not exist, use `inputs.packages`
           packages: ${{ steps.packages-file.outputs.pkgs || inputs.packages }}
