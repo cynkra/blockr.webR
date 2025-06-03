@@ -24,64 +24,64 @@ on:
           type: boolean
           required: false
   
-  name: Build and deploy wasm R package repository
+name: Build and deploy wasm R package repository
   
-  jobs:
-    # Build and upload the wasm packages
-    deploy-cran-repo:
-      runs-on: ubuntu-22.04
-  
-      # Only run latest version of website
-      concurrency:
-        group: github-pages
-        cancel-in-progress: true
-  
-      permissions:
-        # To download GitHub Packages within action
-        repository-projects: read
-        # For publishing to pages environment
-        pages: write
-        id-token: write
-  
-      # Deploys to GitHub pages
-      environment:
-        name: github-pages
-        url: ${{ steps.deployment.outputs.page_url }}
-  
-      steps:
-        - name: Checkout calling repository
-          uses: actions/checkout@v4
-  
-        #- name: Checkout r-wasm/actions repository
-        #  uses: actions/checkout@v4
-        #  with:
-        #    ref: v2
-        #    repository: r-wasm/actions
-        #    token: ${{ secrets.GITHUB_TOKEN }}
-        #    path: .actions
-  
-        - name: Retrieve packages from `./packages` file
-          if: ${{ inputs.packages == '' }}
-          id: packages-file
-          shell: Rscript {0}
-          run: |
-            if (!file.exists("./packages")) {
-              stop("`./packages` file not found (and `packages` input not provided)")
-            }
-            pkgs <- unique(readLines("./packages"))
-            cat("pkgs=", paste0(pkgs, collapse = ","), "\n", file = Sys.getenv("GITHUB_OUTPUT"), sep = "", append = TRUE)
-  
-        - name: Build wasm repo
-          uses: ./build-rwasm
-          with:
-            # If `.pkgs` does not exist, use `inputs.packages`
-            packages: ${{ steps.packages-file.outputs.pkgs || inputs.packages }}
-            repo-path: _site
-            webr-image: ${{ inputs.webr-image }}
-            compress: ${{ inputs.compress }}
-  
-        - name: Upload Pages artifact
-          uses: actions/upload-pages-artifact@v3
-        - name: Deploy to GitHub Pages
-          id: deployment
-          uses: actions/deploy-pages@v4
+jobs:
+  # Build and upload the wasm packages
+  deploy-cran-repo:
+    runs-on: ubuntu-22.04
+
+    # Only run latest version of website
+    concurrency:
+      group: github-pages
+      cancel-in-progress: true
+
+    permissions:
+      # To download GitHub Packages within action
+      repository-projects: read
+      # For publishing to pages environment
+      pages: write
+      id-token: write
+
+    # Deploys to GitHub pages
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Checkout calling repository
+        uses: actions/checkout@v4
+
+      #- name: Checkout r-wasm/actions repository
+      #  uses: actions/checkout@v4
+      #  with:
+      #    ref: v2
+      #    repository: r-wasm/actions
+      #    token: ${{ secrets.GITHUB_TOKEN }}
+      #    path: .actions
+
+      - name: Retrieve packages from `./packages` file
+        if: ${{ inputs.packages == '' }}
+        id: packages-file
+        shell: Rscript {0}
+        run: |
+          if (!file.exists("./packages")) {
+            stop("`./packages` file not found (and `packages` input not provided)")
+          }
+          pkgs <- unique(readLines("./packages"))
+          cat("pkgs=", paste0(pkgs, collapse = ","), "\n", file = Sys.getenv("GITHUB_OUTPUT"), sep = "", append = TRUE)
+
+      - name: Build wasm repo
+        uses: ./build-rwasm
+        with:
+          # If `.pkgs` does not exist, use `inputs.packages`
+          packages: ${{ steps.packages-file.outputs.pkgs || inputs.packages }}
+          repo-path: _site
+          webr-image: ${{ inputs.webr-image }}
+          compress: ${{ inputs.compress }}
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
