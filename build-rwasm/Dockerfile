@@ -8,7 +8,7 @@ COPY code.R /code.R
 
 # TODO: Remove this workaround for r-wasm/webr#422 when no longer needed
 RUN if [ -d "/root/R/x86_64-pc-linux-gnu-library" ]; then find /root/R/x86_64-pc-linux-gnu-library -maxdepth 2 -wholename '*/pak' -exec rm -rf {} \; ; fi
-RUN /opt/R/current/bin/R -q -e 'install.packages("https://packagemanager.posit.co/cran/__linux__/noble/latest/src/contrib/pak_0.8.0.2.tar.gz", repos=NULL)'
+RUN /opt/R/current/bin/R -q -e 'install.packages("https://packagemanager.posit.co/cran/latest/src/contrib/Archive/pak/pak_0.8.0.2.tar.gz", repos=NULL, type="source")'
 
 # Code file to execute when the docker container starts up (`entrypoint.sh`)
 ENTRYPOINT [ "Rscript" ]
