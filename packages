@@ -10,6 +10,7 @@ shinyjs
 shinyFiles
 ellmer
 S7
+httr2
 reactR
 shinyWidgets
 dplyr
