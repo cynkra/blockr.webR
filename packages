@@ -12,6 +12,7 @@ ellmer
 S7
 httr2
 coro
+styler
 reactR
 shinyWidgets
 dplyr
