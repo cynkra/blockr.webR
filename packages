@@ -15,6 +15,7 @@ coro
 styler
 purrr
 R.cache
+R.methodsS3
 reactR
 shinyWidgets
 dplyr
