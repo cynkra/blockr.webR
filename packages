@@ -14,6 +14,7 @@ httr2
 coro
 styler
 purrr
+R.cache
 reactR
 shinyWidgets
 dplyr
