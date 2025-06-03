@@ -51,8 +51,6 @@ jobs:
     steps:
       - name: Checkout calling repository
         uses: actions/checkout@v4
-        with:
-            path: .actions
 
       #- name: Checkout r-wasm/actions repository
       #  uses: actions/checkout@v4
