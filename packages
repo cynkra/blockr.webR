@@ -21,6 +21,7 @@ R.utils
 ggplot2
 gtable
 scales
+farver
 reactR
 shinyWidgets
 dplyr
