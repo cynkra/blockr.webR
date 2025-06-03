@@ -20,6 +20,7 @@ R.oo
 R.utils
 ggplot2
 gtable
+scales
 reactR
 shinyWidgets
 dplyr
