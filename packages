@@ -23,6 +23,7 @@ gtable
 scales
 farver
 RColorBrewer
+palmerpenguins
 reactR
 shinyWidgets
 dplyr
