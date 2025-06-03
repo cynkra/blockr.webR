@@ -18,6 +18,7 @@ R.cache
 R.methodsS3
 R.oo
 R.utils
+ggplot2
 reactR
 shinyWidgets
 dplyr
