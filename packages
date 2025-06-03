@@ -16,6 +16,7 @@ styler
 purrr
 R.cache
 R.methodsS3
+R.oo
 reactR
 shinyWidgets
 dplyr
