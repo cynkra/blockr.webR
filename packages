@@ -22,6 +22,7 @@ ggplot2
 gtable
 scales
 farver
+RColorBrewer
 reactR
 shinyWidgets
 dplyr
