@@ -57,7 +57,11 @@ jobs:
         id: packages-file
         shell: Rscript {0}
         run: |
-          list.files(".")
+          if (!file.exists("./packages")) {
+            stop("`./packages` file not found (and `packages` input not provided)")
+          }
+          pkgs <- unique(readLines("./packages"))
+          cat("pkgs=", paste0(pkgs, collapse = ","), "\n", file = Sys.getenv("GITHUB_OUTPUT"), sep = "", append = TRUE)
 
       - name: Build wasm repo
         uses: ./build-rwasm
