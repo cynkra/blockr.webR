@@ -11,6 +11,7 @@ shinyFiles
 ellmer
 S7
 httr2
+coro
 reactR
 shinyWidgets
 dplyr
