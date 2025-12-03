@@ -37,7 +37,12 @@ pharmaversesdtm
 evaluate
 shinychat
 cynkra/scoutbaR
+cynkra/dockViewR
+cynkra/g6R
+BristolMyersSquibb/blockr
 BristolMyersSquibb/blockr.core
+BristolMyersSquibb/blockr.dock
+BristolMyersSquibb/blockr.dag
 BristolMyersSquibb/blockr.dplyr
 BristolMyersSquibb/blockr.ui
 BristolMyersSquibb/blockr.gt
@@ -47,5 +52,3 @@ BristolMyersSquibb/blockr.ai
 BristolMyersSquibb/blockr.session
 BristolMyersSquibb/blockr.md
 BristolMyersSquibb/blockr.ggplot
-cynkra/dockViewR
-cynkra/g6R
