@@ -1,5 +1,3 @@
-rlang
-vctrs
 generics
 DT
 htmlwidgets
@@ -29,7 +27,6 @@ constructive
 waldo
 reactR
 shinyWidgets
-dplyr
 pillar
 tibble
 tidyr
