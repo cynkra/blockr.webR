@@ -15,7 +15,10 @@ jobs:
   deploy-cran-repo:
     uses: ./.github/workflows/deploy-cran-repo.yml
     with:
-      webr-image: "ghcr.io/r-wasm/webr:main"
+      # Must match the webR version shipped by the consumer (shinylive 0.10.8
+      # bundles webR 0.5.5 / R 4.5.0). Building against `:main` produces R 4.6
+      # binaries that shinylive cannot find, yielding "no package called X".
+      webr-image: "ghcr.io/r-wasm/webr:v0.5.5"
     permissions:
       # To download GitHub Packages within action
       repository-projects: read
