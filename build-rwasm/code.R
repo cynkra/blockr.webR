@@ -157,10 +157,23 @@ rwasm:::update_repo(
   compress = compress_lgl
 )
 
-message("\n\nMaking library")
-rwasm::make_vfs_library(
-  out_dir = image_path,
-  repo_dir = repo_path,
-  strip = strip,
-  compress = compress_lgl
+message("\n\nMaking library tarball with appended VFS metadata (v2.0)")
+# Build a regular .tar.gz of the installed library, then append the VFS
+# metadata to its tail with rwasm::add_tar_index(). The resulting file is a
+# single self-contained image that webR's `webr::mount(type = "workerfs")`
+# decodes directly (no separate .js.metadata sidecar).
+lib_tmp <- fs::path(tempfile("rwasm-lib-"))
+on.exit(unlink(lib_tmp, recursive = TRUE), add = TRUE)
+rwasm:::make_library(repo_path, lib_dir = lib_tmp, strip = strip)
+tar_out <- fs::path(image_path, "library.tar.gz")
+withr::with_dir(
+  lib_tmp,
+  utils::tar(
+    fs::path_abs(tar_out),
+    files = list.files("."),
+    compression = "gzip",
+    tar = "internal"
+  )
 )
+rwasm::add_tar_index(tar_out)
+message("Wrote ", tar_out)
