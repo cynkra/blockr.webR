@@ -19,6 +19,7 @@ jobs:
       # bundles webR 0.5.5 / R 4.5.0). Building against `:main` produces R 4.6
       # binaries that shinylive cannot find, yielding "no package called X".
       webr-image: "ghcr.io/r-wasm/webr:v0.5.5"
+      compress: true
     permissions:
       # To download GitHub Packages within action
       repository-projects: read

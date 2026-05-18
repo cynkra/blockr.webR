@@ -71,6 +71,10 @@ jobs:
           # If `.pkgs` does not exist, use `inputs.packages`
           packages: ${{ steps.packages-file.outputs.pkgs || inputs.packages }}
           repo-path: _site
+          # Put the pre-built VFS library (library.data + library.js.metadata)
+          # into _site/ so it gets deployed to GH Pages, enabling consumers to
+          # `webr::mount()` it in one shot instead of installing each package.
+          image-path: _site
           webr-image: ${{ inputs.webr-image }}
           compress: ${{ inputs.compress }}
 
