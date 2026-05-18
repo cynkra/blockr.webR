@@ -165,11 +165,13 @@ message("\n\nMaking library tarball with appended VFS metadata (v2.0)")
 lib_tmp <- fs::path(tempfile("rwasm-lib-"))
 on.exit(unlink(lib_tmp, recursive = TRUE), add = TRUE)
 rwasm:::make_library(repo_path, lib_dir = lib_tmp, strip = strip)
-tar_out <- fs::path(image_path, "library.tar.gz")
+# Resolve absolute output path BEFORE `with_dir` changes getwd().
+fs::dir_create(image_path)
+tar_out <- fs::path_abs(fs::path(image_path, "library.tar.gz"))
 withr::with_dir(
   lib_tmp,
   utils::tar(
-    fs::path_abs(tar_out),
+    tar_out,
     files = list.files("."),
     compression = "gzip",
     tar = "internal"
