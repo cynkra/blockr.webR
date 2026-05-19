@@ -157,6 +157,57 @@ rwasm:::update_repo(
   compress = compress_lgl
 )
 
+message("\n\nResolving transitive deps from r-wasm.org")
+# Compute the full dependency closure of our locally-built packages, then
+# pull missing transitive deps as pre-built wasm binaries from
+# `https://repo.r-wasm.org`. This way the VFS image below contains everything
+# `library(blockr.X)` will ever need at load time -- no runtime install
+# round-trips when the consumer (e.g. shinylive) hits a `library()` call.
+r_ver <- R_system_version(getOption("rwasm.webr_version"))
+r_minor <- paste0(r_ver$major, ".", r_ver$minor)
+contrib_bin <- fs::path(repo_abs, "bin", "emscripten", "contrib", r_minor)
+contrib_src <- fs::path(repo_abs, "src", "contrib")
+wasm_contrib_url <- sprintf(
+  "https://repo.r-wasm.org/bin/emscripten/contrib/%s", r_minor
+)
+
+local_avail <- utils::available.packages(
+  contriburl = paste0("file:", contrib_bin)
+)
+wasm_avail <- utils::available.packages(contriburl = wasm_contrib_url)
+
+# Union of available packages (local versions win on duplicate names)
+combined_avail <- rbind(
+  local_avail,
+  wasm_avail[!rownames(wasm_avail) %in% rownames(local_avail), , drop = FALSE]
+)
+
+dep_closure <- unique(unlist(tools::package_dependencies(
+  rownames(local_avail),
+  db = combined_avail,
+  which = c("Depends", "Imports", "LinkingTo"),
+  recursive = TRUE
+)))
+
+base_pkgs <- rownames(installed.packages(priority = "base"))
+missing <- setdiff(dep_closure, c(rownames(local_avail), base_pkgs))
+missing <- intersect(missing, rownames(wasm_avail))
+message("Need to pull ", length(missing), " deps from r-wasm.org")
+
+for (p in missing) {
+  ver <- wasm_avail[p, "Version"]
+  tgz <- sprintf("%s_%s.tgz", p, ver)
+  url <- file.path(wasm_contrib_url, tgz)
+  dst <- fs::path(contrib_bin, tgz)
+  tryCatch(
+    utils::download.file(url, dst, quiet = TRUE, mode = "wb"),
+    error = function(e) message("  skip ", p, ": ", conditionMessage(e))
+  )
+}
+
+# Refresh the binary PACKAGES index so make_library() sees the new tarballs
+tools::write_PACKAGES(contrib_bin, type = "mac.binary")
+
 message("\n\nMaking library tarball with appended VFS metadata (v2.0)")
 # Build a regular .tar.gz of the installed library, then append the VFS
 # metadata to its tail with rwasm::add_tar_index(). The resulting file is a
