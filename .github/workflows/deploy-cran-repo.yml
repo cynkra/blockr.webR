@@ -75,6 +75,10 @@ jobs:
           # into _site/ so it gets deployed to GH Pages, enabling consumers to
           # `webr::mount()` it in one shot instead of installing each package.
           image-path: _site
+          # Strip non-runtime files from each package to shrink the VFS image
+          # and the number of files webR has to register in workerfs at boot.
+          # Recommended set per the rwasm docs.
+          strip: "demo, doc, examples, help, html, include, tests, vignette"
           webr-image: ${{ inputs.webr-image }}
           compress: ${{ inputs.compress }}
 
