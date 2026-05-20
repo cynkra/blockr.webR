@@ -54,6 +54,11 @@ withr::local_envvar(list(
 install.packages("remotes")
 remotes::install_github("r-wasm/rwasm", upgrade = "never")
 
+# Force rwasm's .onLoad to fire so `options("rwasm.webr_version")` (and
+# friends) are populated -- otherwise the R version below resolves to "."
+# and every r-wasm.org lookup fails.
+loadNamespace("rwasm")
+
 cran_mirror <- "https://packagemanager.posit.co/cran/latest"
 avail <- available.packages(
   contriburl = contrib.url(cran_mirror, type = "source")
