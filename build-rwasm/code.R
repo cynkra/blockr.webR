@@ -275,3 +275,12 @@ rwasm:::update_repo(
   repo_dir = repo_abs,
   compress = compress_lgl
 )
+
+# `update_repo()` only refreshes PACKAGES when it freshly downloaded a source
+# tarball via `make_remote_tarball()`. We pre-place tarballs in `contrib_src`
+# ourselves, so its `need_update` flag stays FALSE and PACKAGES is never
+# written -- 404'ing consumers. Force the refresh here.
+contrib_bin <- fs::path(repo_abs, "bin", "emscripten", "contrib", r_minor)
+tools::write_PACKAGES(contrib_src)
+tools::write_PACKAGES(contrib_bin, type = "mac.binary")
+message("Refreshed PACKAGES indexes in src/ and bin/emscripten/contrib/", r_minor)
